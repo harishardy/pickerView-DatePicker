@@ -21,28 +21,67 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         
         if component == 0 {
-            return countryX.count
+            return countryXValue.count
         }
             
         else {
-            return yearX.count
+            return yearXValue.count
         }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String?
     {
         if component == 0 {
-            return String(countryX[row])
+            return String(countryXValue[row])
         } else {
             
-            return String(yearX[row])
+            return String(yearXValue[row])
         }
+        
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
+    {
+        countryX = countryXValue[pickerViewX.selectedRow(inComponent: 0)]
+       
+        yearX = yearXValue[pickerViewX.selectedRow(inComponent: 1)]
+        
+       
+
+        
+        
+        labelX.text = "\(countryX) \(yearX)"
+        
     }
     
     
-    let countryX = ["Australia","Europe","India","China","America","Japan"]
     
-    let yearX = ["1990","1991","1992","1993","1994","1995","1996","1997","1998","1999"]
+    
+ 
+    
+    
+
+    
+    
+    
+    var countryX: String = ""
+    
+    var yearX: String = ""
+    
+    var dateX: String = ""
+    
+    var countryXValue = ["Australia","Europe","India","China","America","Japan"]
+    
+    var yearXValue = ["1990","1991","1992","1993","1994","1995","1996","1997","1998","1999"]
+    
+   
+    @IBOutlet weak var labelX2: UILabel!
+    
+    
+    @IBOutlet weak var labelX1: UILabel!
+    
+    
     
     @IBOutlet weak var labelX: UILabel!
     
@@ -56,20 +95,30 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var datePickerX: UIDatePicker!
     
     
-    
-  
-    @IBAction func buttonX(_ sender: UIButton) {
+    @IBAction func datePickerChangeX(_ sender: Any) {
+        
+        let dateFormatterX = DateFormatter()
+        
+        dateFormatterX.dateFormat = "EEEE,  MMM d   h:mm a"
+   
+        dateX = dateFormatterX.string(from: datePickerX.date)
+        
+        labelX1.text = "\(dateX)"
+        
     }
-    
     
 
     
     
     
     
-    
-    
     override func viewDidLoad() {
+        
+        
+      labelX2.text = "\(countryX) \(yearX) \(dateX)"
+        
+        
+        
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
