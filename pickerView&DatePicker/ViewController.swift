@@ -43,37 +43,54 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        countryX = countryXValue[pickerViewX.selectedRow(inComponent: 0)]
-       
-        yearX = yearXValue[pickerViewX.selectedRow(inComponent: 1)]
+        if component == 0
+        {
+            
+        countryX = countryXValue[row] as NSString
         
+        labelX2.text = "\(countryX) \(yearX)   \(dateX)"
+            
+        }
+        
+        else
+        {
        
+            yearX = yearXValue[row] as NSString
+            
+            labelX2.text = "\(countryX) \(yearX)   \(dateX)"
+        }
+        
 
-        
-        
-        labelX.text = "\(countryX) \(yearX)"
+ 
         
     }
     
     
     
     
+    @objc func datePickerValueChanged (datePickerX: UIDatePicker) {
+        let dateFormatterX = DateFormatter()
+        dateFormatterX.dateFormat = "EEEE,  MMM d   h:mm a"
+        let dateValueX = dateFormatterX.string(from: datePickerX.date)
+        dateX = dateValueX as NSString
+        labelX2.text = "\(countryX) \(yearX)   \(dateX)"
+    }
+    
+    
+    
  
     
     
-
+    var countryXValue : [String] = [String]()
     
+    var yearXValue : [String] = [String]()
     
+    var countryX = NSString()
     
-    var countryX: String = ""
+    var yearX = NSString()
     
-    var yearX: String = ""
+    var dateX = NSString()
     
-    var dateX: String = ""
-    
-    var countryXValue = ["Australia","Europe","India","China","America","Japan"]
-    
-    var yearXValue = ["1990","1991","1992","1993","1994","1995","1996","1997","1998","1999"]
     
    
     @IBOutlet weak var labelX2: UILabel!
@@ -95,17 +112,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     @IBOutlet weak var datePickerX: UIDatePicker!
     
     
-    @IBAction func datePickerChangeX(_ sender: Any) {
-        
-        let dateFormatterX = DateFormatter()
-        
-        dateFormatterX.dateFormat = "EEEE,  MMM d   h:mm a"
-   
-        dateX = dateFormatterX.string(from: datePickerX.date)
-        
-        labelX1.text = "\(dateX)"
-        
-    }
+    
     
 
     
@@ -114,8 +121,15 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     override func viewDidLoad() {
         
+        datePickerX.addTarget(self, action: #selector(ViewController.datePickerValueChanged), for: UIControl.Event.valueChanged)
         
-      labelX2.text = "\(countryX) \(yearX) \(dateX)"
+        countryXValue = ["Australia","Europe","India","China","America","Japan"]
+        
+        yearXValue = ["1990","1991","1992","1993","1994","1995","1996","1997","1998","1999"]
+
+        
+      
+        
         
         
         
