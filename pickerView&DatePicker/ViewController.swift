@@ -53,7 +53,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         if component == 0
         {
             
-            countryX = countryXValue[row] as NSString
+            countryX = countryXValue[row] as String
         
             labelX2.text = "\(countryX) \(yearX)   \(dateX)"
             
@@ -62,7 +62,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         else
         {
        
-            yearX = yearXValue[row] as NSString
+            yearX = yearXValue[row] as String
             
             labelX2.text = "\(countryX) \(yearX)   \(dateX)"
         }
@@ -80,7 +80,7 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
         
         let dateValueX = dateFormatterX.string(from: datePickerX.date)
         
-        dateX = dateValueX as NSString
+        dateX = dateValueX as String
         
         labelX2.text = "\(countryX) \(yearX)   \(dateX)"
         
@@ -92,11 +92,11 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     
     var yearXValue : [String] = [String]()
     
-    var countryX = NSString()
+    var countryX : String = ""
     
-    var yearX = NSString()
+    var yearX : String = ""
     
-    var dateX = NSString()
+    var dateX : String = ""
     
     // labelX2, pickerViewX, datePickerX
    
